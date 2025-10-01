@@ -1,0 +1,160 @@
+.wallet-setup-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a472a 0%, #0d2818 100%);
+  padding: 20px;
+}
+
+.wallet-setup-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 20px;
+  padding: 40px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 100%;
+}
+
+.wallet-setup-card h2 {
+  font-size: 2rem;
+  color: #1a472a;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.welcome-text {
+  text-align: center;
+  color: #666;
+  font-size: 1.1rem;
+  margin-bottom: 30px;
+}
+
+.wallet-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 30px;
+  padding: 20px;
+  background: #f8f8f8;
+  border-radius: 12px;
+}
+
+.wallet-info {
+  text-align: center;
+}
+
+.success-text {
+  color: #27ae60;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+
+.wallet-address {
+  font-family: monospace;
+  color: #666;
+  font-size: 0.9rem;
+}
+
+.player-setup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.player-setup label {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.name-input {
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s;
+}
+
+.name-input:focus {
+  outline: none;
+  border-color: #1a472a;
+}
+
+.test-mode {
+  padding: 15px;
+  background: #f0f8ff;
+  border-radius: 8px;
+  border: 2px solid #3498db;
+}
+
+.test-mode label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  font-weight: normal;
+}
+
+.test-mode input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.join-game-btn {
+  padding: 16px 32px;
+  background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.join-game-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(46, 204, 113, 0.4);
+}
+
+.join-game-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.info-box {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.info-box h3 {
+  color: #856404;
+  margin-bottom: 15px;
+  font-size: 1.1rem;
+}
+
+.info-box ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.info-box li {
+  color: #856404;
+  padding: 8px 0;
+  padding-left: 25px;
+  position: relative;
+}
+
+.info-box li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  font-weight: bold;
+}
