@@ -56,14 +56,64 @@ cd solana-poker-dapp
 
 ### 2. Install Solana CLI
 
+**Method 1: Using Homebrew (macOS - Recommended)**
+
+```bash
+brew install solana
+```
+
+**Method 2: Direct Install Script**
+
 ```bash
 sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+```
+
+**Method 3: If you get SSL errors (LibreSSL SSL_connect error)**
+
+Try using `wget` instead:
+```bash
+# Install wget if you don't have it
+brew install wget
+
+# Download and install Solana
+wget -O - https://release.solana.com/stable/install | sh
+```
+
+Or download directly from GitHub:
+```bash
+# For macOS (Apple Silicon M1/M2)
+curl -L https://github.com/solana-labs/solana/releases/download/v1.17.0/solana-release-aarch64-apple-darwin.tar.bz2 -o solana.tar.bz2
+
+# For macOS (Intel)
+curl -L https://github.com/solana-labs/solana/releases/download/v1.17.0/solana-release-x86_64-apple-darwin.tar.bz2 -o solana.tar.bz2
+
+# Extract and install
+tar -xjf solana.tar.bz2
+cd solana-release
+export PATH=$PWD/bin:$PATH
+echo 'export PATH="'$PWD'/bin:$PATH"' >> ~/.zshrc  # or ~/.bash_profile
+```
+
+**Method 4: Using npm (Alternative)**
+
+```bash
+npm install -g @solana/cli
 ```
 
 Verify installation:
 ```bash
 solana --version
 ```
+
+**Troubleshooting Solana Installation:**
+
+If you still have issues:
+1. Check your internet connection
+2. Try disabling VPN if you're using one
+3. Check if your firewall is blocking the connection
+4. Try the Homebrew method (most reliable on macOS)
+5. Visit https://docs.solana.com/cli/install-solana-cli-tools for latest instructions
+
 
 ### 3. Install Rust
 

@@ -74,20 +74,32 @@ solana-poker-dapp/
 
 ### 1. Install Prerequisites
 
+**Solana CLI (Choose one method):**
+
 ```bash
-# Install Solana CLI
+# Method 1: Homebrew (Recommended for macOS)
+brew install solana
+
+# Method 2: Direct install
 sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
 
-# Install Rust (if not already installed)
-curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+# Having SSL errors? See SOLANA_INSTALL.md for more options
+```
 
-# Verify installations
+**Rust (if not already installed):**
+```bash
+curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
+
+**Verify installations:**
+```bash
 solana --version
 rustc --version
 node --version
 ```
 
-### 2. Configure Solana
+**Troubleshooting:** If you get SSL errors installing Solana, check `SOLANA_INSTALL.md` for detailed solutions.
+
 
 ```bash
 # Set to devnet for testing

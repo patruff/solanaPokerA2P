@@ -15,7 +15,26 @@ rustc --version
 solana --version
 ```
 
-Don't have them? See the main README for installation links.
+**Don't have them?**
+
+- **Node.js**: https://nodejs.org (download and install)
+- **Rust**: `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh`
+- **Solana CLI**: See below for installation options
+
+### Installing Solana CLI
+
+**Option 1: Homebrew (Easiest for macOS)**
+```bash
+brew install solana
+```
+
+**Option 2: Direct Install**
+```bash
+sh -c "$(curl -sSfL https://release.solana.com/stable/install)"
+```
+
+**Having SSL errors?** See `SOLANA_INSTALL.md` for detailed troubleshooting and alternative methods.
+
 
 ## 5-Minute Setup
 

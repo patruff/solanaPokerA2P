@@ -8,8 +8,12 @@ Use this checklist to track your progress setting up the Solana Poker DApp.
 - [ ] Node.js installed (v16+) - `node --version`
 - [ ] Rust installed - `rustc --version`
 - [ ] Solana CLI installed - `solana --version`
+  - [ ] Tried Homebrew: `brew install solana`
+  - [ ] OR tried direct install: `sh -c "$(curl -sSfL https://release.solana.com/stable/install)"`
+  - [ ] If SSL errors, checked `SOLANA_INSTALL.md` for alternatives
 - [ ] Phantom wallet browser extension installed
 - [ ] AWS CLI installed (for S3 deployment) - `aws --version`
+
 
 ### Solana Configuration
 - [ ] Solana configured for devnet - `solana config set --url devnet`
