@@ -32,7 +32,8 @@ Thumbs.db
 test-ledger/
 *.so
 *.keypair
-*.json
+*.keypair.json
+*-keypair.json
 
 # Build artifacts
 *.bpf
