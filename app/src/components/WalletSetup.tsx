@@ -8,29 +8,36 @@ import './WalletSetup.css';
 
 export default function WalletSetup({ onComplete }: { onComplete: () => void }) {
   const { publicKey, connected } = useWallet();
-  const { user, updateWalletAddress } = useAuth();
+  const { user, signIn } = useAuth();
   const { initializeGame } = useGame();
   const [playerName, setPlayerName] = useState('');
-  const [isSpectator, setIsSpectator] = useState(false);
+  const [useTestMode, setUseTestMode] = useState(true);
+  const [addBotOpponent, setAddBotOpponent] = useState(true);
 
   useEffect(() => {
-    if (connected && publicKey) {
-      updateWalletAddress(publicKey.toString());
+    // Auto sign-in when component mounts
+    if (!user) {
+      signIn('Player');
     }
-  }, [connected, publicKey, updateWalletAddress]);
+  }, [user, signIn]);
 
   const handleJoinGame = () => {
-    if (!connected || !publicKey || !user) {
-      alert('Please connect your wallet first');
+    const name = playerName || user?.name || 'Player';
+
+    // Use fake wallet if in test mode
+    const walletAddress = useTestMode
+      ? `FAKE_WALLET_${Math.random().toString(36).substring(7)}`
+      : publicKey?.toString();
+
+    if (!useTestMode && (!connected || !publicKey)) {
+      alert('Please connect your wallet first or enable test mode');
       return;
     }
-
-    const name = playerName || user.displayName || 'Player';
 
     // For testing: Initialize game with predefined players
     const players: Player[] = [
       {
-        pubkey: publicKey.toString(),
+        pubkey: walletAddress!,
         name: name,
         chips: 1000,
         currentBet: 0,
@@ -39,8 +46,8 @@ export default function WalletSetup({ onComplete }: { onComplete: () => void }) 
       },
     ];
 
-    // Add test bot if in test mode
-    if (isSpectator) {
+    // Add test bot if enabled
+    if (addBotOpponent) {
       players.push({
         pubkey: 'BOT_' + Date.now(),
         name: 'Test Bot',
@@ -58,26 +65,15 @@ export default function WalletSetup({ onComplete }: { onComplete: () => void }) 
   return (
     <div className="wallet-setup-container">
       <div className="wallet-setup-card">
-        <h2>Connect Your Wallet</h2>
-        <p className="welcome-text">Welcome, {user?.displayName}!</p>
-
-        <div className="wallet-section">
-          <WalletMultiButton />
-          
-          {connected && publicKey && (
-            <div className="wallet-info">
-              <p className="success-text">✓ Wallet Connected</p>
-              <p className="wallet-address">{publicKey.toString().slice(0, 8)}...{publicKey.toString().slice(-8)}</p>
-            </div>
-          )}
-        </div>
+        <h2>🎰 Poker Game Setup</h2>
+        <p className="welcome-text">Welcome, {user?.name || 'Player'}!</p>
 
         <div className="player-setup">
-          <label htmlFor="playerName">Player Name (optional)</label>
+          <label htmlFor="playerName">Your Name</label>
           <input
             id="playerName"
             type="text"
-            placeholder={user?.displayName || 'Enter your name'}
+            placeholder="Enter your name"
             value={playerName}
             onChange={(e) => setPlayerName(e.target.value)}
             className="name-input"
@@ -87,29 +83,51 @@ export default function WalletSetup({ onComplete }: { onComplete: () => void }) 
             <label>
               <input
                 type="checkbox"
-                checked={isSpectator}
-                onChange={(e) => setIsSpectator(e.target.checked)}
+                checked={useTestMode}
+                onChange={(e) => setUseTestMode(e.target.checked)}
               />
-              <span>Test Mode (Add Bot Opponent)</span>
+              <span>🎮 Test Mode (No Wallet Required)</span>
             </label>
           </div>
+
+          <div className="test-mode">
+            <label>
+              <input
+                type="checkbox"
+                checked={addBotOpponent}
+                onChange={(e) => setAddBotOpponent(e.target.checked)}
+              />
+              <span>🤖 Add Bot Opponent</span>
+            </label>
+          </div>
+
+          {!useTestMode && (
+            <div className="wallet-section">
+              <WalletMultiButton />
+              {connected && publicKey && (
+                <div className="wallet-info">
+                  <p className="success-text">✓ Wallet Connected</p>
+                  <p className="wallet-address">{publicKey.toString().slice(0, 8)}...{publicKey.toString().slice(-8)}</p>
+                </div>
+              )}
+            </div>
+          )}
 
           <button
             className="join-game-btn"
             onClick={handleJoinGame}
-            disabled={!connected}
           >
-            {connected ? 'Join Game' : 'Connect Wallet First'}
+            Start Game 🃏
           </button>
         </div>
 
         <div className="info-box">
-          <h3>Getting Started</h3>
+          <h3>ℹ️ How to Play</h3>
           <ul>
-            <li>Connect your Phantom wallet</li>
-            <li>Make sure you're on Solana Devnet</li>
-            <li>You'll need some test SOL (get from faucet)</li>
-            <li>Enable test mode to play against a bot</li>
+            <li>✅ Test Mode: Play instantly without a wallet</li>
+            <li>🤖 Bot Opponent: Practice against AI</li>
+            <li>💰 Start with 1000 chips</li>
+            <li>🎯 Test the poker mechanics</li>
           </ul>
         </div>
       </div>
